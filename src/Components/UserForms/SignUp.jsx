@@ -1,9 +1,22 @@
 import React, { useState } from 'react'
 import './userForms.css'
+import config from '../../config'
+import axios from 'axios'
 
 export const SignUp = () => {
 
   const [action, setAction] = useState('Signup')
+
+  const submitSignUpRequest = ()=> {
+    const apiUrl = process.env.NODE_ENV === 'production' ? config.production.apiUrl : config.development.apiUrl;
+
+    axios.post(`${apiUrl}/api/v1/users`).then(res => {
+      console.log('Response from API:', res)
+    })
+    .catch(err => {
+      console.log("Error: ", err)
+    })
+  }
 
   return (
     <div className='container'>
@@ -35,8 +48,8 @@ export const SignUp = () => {
       {action === 'Login' ? <div className='forgot-password'>Forgot Password? <span>Click Here!</span></div> : <div></div> }
       
       <div className='submit-container'>
-        <div className= {action === 'Login' ? 'sumbit' : 'submit gray'} onClick = {()=> {setAction('Signup')}}>Sign Up</div>
-        <div className={action === 'Signup' ? 'sumbit' : 'submit gray'} onClick = {()=> {setAction('Login')}}>Login</div>
+        <div className= {action === 'Login' ? 'sumbit' : 'submit gray'} onClick = {()=> {setAction('Signup')}} onSubmit={action === 'Signup' ? submitSignUpRequest() : null}>Sign Up</div>
+        <div className={action === 'Signup' ? 'sumbit' : 'submit gray'} onClick = {()=> {setAction('Login')}} onSubmit={action === 'Login' ? submitLoginRequest() : null}>Login</div>
       </div>
     </div>
   )
