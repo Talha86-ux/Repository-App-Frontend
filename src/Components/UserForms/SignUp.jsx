@@ -2,15 +2,17 @@ import React, { useState } from 'react'
 import './userForms.css'
 import config from '../../config'
 import axios from 'axios'
+import { useNavigate } from "react-router-dom";
 
 export const SignUp = () => {
-
+  const navigate = useNavigate();
   const [action, setAction] = useState('Signup')
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
+  const apiUrl = process.env.NODE_ENV === 'production' ? config.production.apiUrl : config.development.apiUrl
 
   function camelToSnake(obj) {
     return Object.keys(obj).reduce((acc, key) => {
@@ -20,7 +22,6 @@ export const SignUp = () => {
   }
 
   const submitSignUpRequest = ()=> {
-    const apiUrl = process.env.NODE_ENV === 'production' ? config.production.apiUrl : config.development.apiUrl;
     const SignupParams = {
       firstName: firstName,
       lastName: lastName,
@@ -36,6 +37,25 @@ export const SignUp = () => {
     .catch(err => {
       console.log(err)
     })
+  }
+
+  const submitLoginRequest = ()=> {
+    const loginParams = {
+      email: email,
+      password: password
+    }
+
+    axios.post(`${apiUrl}/api/v1/sessions`, loginParams).then(res => {
+      if (res.data.error){
+        alert(res.data.error)
+      }else {
+        navigate("/dashboard");
+        alert(res.data.message)
+      }
+    })
+    .catch(err => {
+      console.log(err)
+    })    
   }
 
   return (
@@ -74,8 +94,8 @@ export const SignUp = () => {
         {action === 'Login' ? <div className='forgot-password'>Forgot Password? <span>Click Here!</span></div> : <div></div> }
         
         <div className='submit-container'>
-          <div className= {action === 'Login' ? 'submit' : 'submit gray'} onClick = {(e)=>  {submitSignUpRequest(e); setAction('Signup')}} >Sign Up</div>
-          <div className={action === 'Signup' ? 'submit' : 'submit gray'} onClick = {()=> {setAction('Login')}}>Login</div>
+          <div className= {action === 'Login' ? 'submit' : 'submit gray'} onClick = {()=>  {submitSignUpRequest(); setAction('Signup')}} >Sign Up</div>
+          <div className={action === 'Signup' ? 'submit' : 'submit gray'} onClick = {()=> {submitLoginRequest(); setAction('Login')}}>Login</div>
         </div>
       </form>
     </div>
