@@ -3,6 +3,7 @@ import './userForms.css'
 import config from '../../config'
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
+import cogoToast from 'cogo-toast';
 
 export const SignUp = () => {
   const navigate = useNavigate();
@@ -32,7 +33,15 @@ export const SignUp = () => {
     const params = camelToSnake(SignupParams);
 
     axios.post(`${apiUrl}/api/v1/users`, params).then(res => {
-      return res.data.user
+      if (res.data.user){
+        navigate("/dashboard")
+        cogoToast.success("User registered successfully!")
+        const current_user = res.data.user
+        localStorage.setItem('user', JSON.stringify(current_user))
+        return res.data.user
+      }else{
+        cogoToast.error("Couldn't create the user, please try again")
+      }
     })
     .catch(err => {
       console.log(err)
@@ -49,10 +58,10 @@ export const SignUp = () => {
       const current_user = res.data.user
       localStorage.setItem('user', JSON.stringify(current_user))
       if (res.data.error){
-        alert(res.data.error)
+        cogoToast.error(res.data.error);
       }else {
         navigate("/dashboard");
-        alert(res.data.message)
+        cogoToast.success(res.data.message);
       }
     })
     .catch(err => {
