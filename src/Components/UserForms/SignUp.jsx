@@ -46,6 +46,8 @@ export const SignUp = () => {
     }
 
     axios.post(`${apiUrl}/api/v1/sessions`, loginParams).then(res => {
+      const current_user = res.data.user
+      localStorage.setItem('user', JSON.stringify(current_user))
       if (res.data.error){
         alert(res.data.error)
       }else {
