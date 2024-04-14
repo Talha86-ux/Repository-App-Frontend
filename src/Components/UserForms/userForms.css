@@ -65,7 +65,7 @@
 .submit-container{
   display: flex;
   gap: 30px;
-  margin: 60px auto;
+  margin: 60px auto 0 40%;
 }
 
 .submit{
