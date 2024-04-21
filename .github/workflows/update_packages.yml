@@ -1,0 +1,29 @@
+name: Check package versions
+on:
+  push:
+    branches:
+      - 'master'
+  pull_request:
+    branches:
+      - 'master'
+jobs:
+  sample-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16' # You can change this version if needed
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Check package versions
+        run: |
+          # Check package versions
+          npm outdated --long --parseable=true --depth=0 | cut -d: -f4 | grep -vE "^\$" | while read -r line ; do
+            echo "Outdated package: $line"
+          done
