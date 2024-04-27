@@ -7,7 +7,7 @@ import cogoToast from 'cogo-toast';
 
 export const SignUp = () => {
   const navigate = useNavigate();
-  const [action, setAction] = useState('Signup')
+  const [action, setAction] = useState('Register Yourself!')
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')

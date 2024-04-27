@@ -6,10 +6,12 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { SignUp } from './Components/UserForms/SignUp';
 import { Home } from './Components/Home/home';
+import { Header} from './Components/header';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <Header />
     <BrowserRouter>
       <Routes>
         <Route index element={<App />} />
