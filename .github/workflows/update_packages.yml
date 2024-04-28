@@ -20,6 +20,18 @@ jobs:
         with:
           node-version: '16.14.2'
 
+      # Add the following steps before installing dependencies
+      - name: Check Node.js version
+        run: node -v
+
+      - name: Check npm version
+        run: npm -v
+
+      # Add the following step after checking Node.js and npm versions
+      - name: Force resolution
+        run: npm install --force
+
+      # Continue with installing dependencies
       - name: Install dependencies
         run: npm install
 
