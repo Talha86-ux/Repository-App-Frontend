@@ -33,7 +33,7 @@
 }
 
 .app-header{
-  background-color: #a4c991;
+  background-color: black;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -44,6 +44,16 @@
   height: 100px;
 }
 
+.header-text{
+  margin-right: 70px;
+}
+
+.site-link{
+  color: yellow;
+  text-decoration: none;
+  margin-left: 100px;
+  font-size: larger;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
