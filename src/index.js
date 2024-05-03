@@ -7,7 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { SignUp } from './Components/UserForms/SignUp';
 import { Home } from './Components/Home/home';
 import { Header} from './Components/header';
-
+import { Footer } from './Components/Footer/footer';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -19,6 +19,7 @@ root.render(
         <Route path="dashboard" element={<Home />} />
       </Routes>
     </BrowserRouter>
+    <Footer />
   </React.StrictMode>
 );
 
