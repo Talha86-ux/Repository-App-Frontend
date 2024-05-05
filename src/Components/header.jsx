@@ -4,7 +4,7 @@ export const Header = () =>{
       <img className="logo-img" src="logo512.png" alt="Logo" />
       <div className="header-text">
         <h3 >Looking for awesome T-shirts?</h3>
-        <a className="site-link" href="#">Buy Now</a>
+        <a className="site-link" href="https://radstore.pk/collections/t-shirts" target="_blank" rel="noreferrer">Buy Now</a>
       </div>
     </header>
   )
