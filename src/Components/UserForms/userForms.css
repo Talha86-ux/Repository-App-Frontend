@@ -85,3 +85,11 @@
 .sumit .gray{
   cursor: pointer;
 }
+
+.passwordChange{
+  margin-bottom: 20px;
+}
+
+.back-button{
+  margin: 20px 20px;
+}

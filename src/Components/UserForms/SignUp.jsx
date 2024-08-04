@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import './userForms.css'
 import config from '../../config'
 import axios from 'axios'
-import { useNavigate } from "react-router-dom";
-import cogoToast from 'cogo-toast';
+import { useNavigate } from "react-router-dom"
+import cogoToast from 'cogo-toast'
+import { Link } from 'react-router-dom'
+import { camelToSnake } from '../../utils/helpers'
 
 export const SignUp = () => {
   const navigate = useNavigate();
@@ -14,13 +16,6 @@ export const SignUp = () => {
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
   const apiUrl = process.env.NODE_ENV === 'production' ? config.production.apiUrl : config.development.apiUrl
-
-  function camelToSnake(obj) {
-    return Object.keys(obj).reduce((acc, key) => {
-      acc[key.replace(/([A-Z])/g, "_$1").toLowerCase()] = obj[key];
-      return acc;
-    }, {});
-  }
 
   const submitSignUpRequest = ()=> {
     const SignupParams = {
@@ -69,6 +64,10 @@ export const SignUp = () => {
     })    
   }
 
+  const handleRedirect = ()=> {
+    navigate('forgot-password')
+  }
+
   return (
     <div className='container'>
       <form>
@@ -102,7 +101,14 @@ export const SignUp = () => {
           </div>}
         </div>
 
-        {action === 'Login' ? <div className='forgot-password'>Forgot Password? <span>Click Here!</span></div> : <div></div> }
+        {action === 'Login' ? (
+        <div className='forgot-password'>
+          <Link to='/forgot-password'>Forgotten your Password?</Link>
+          <button onClick={handleRedirect} style={{ display: 'none' }}></button>
+        </div>
+        ) : (
+          <div></div>
+        )}
         
         <div className='submit-container'>
           <div className= {action === 'Login' ? 'submit' : 'submit gray'} onClick = {()=>  {submitSignUpRequest(); setAction('Signup')}} >Sign Up</div>
