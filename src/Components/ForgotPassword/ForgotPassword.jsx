@@ -10,18 +10,38 @@ export const ForgotPassword = () =>{
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
+  const [showResetPasswordForm, setShowResetPasswordForm] = useState(false)
+  const [resetPasswordToken, setResetPasswordToken] = useState('')
   const apiUrl = process.env.NODE_ENV === 'production' ? config.production.apiUrl : config.development.apiUrl
+  
+  const verifyUserEmailRequest = () => {
+    const findUserParams = {
+      email: email
+    }
 
-  const submitUpdatePasswordRequest = () => {
+    axios.post(`${apiUrl}/api/v1/forgot-password`, findUserParams).then(res => {
+      if (res.data){
+        setShowResetPasswordForm(true)
+        setResetPasswordToken(res.data.reset_token)
+      }else {
+        cogoToast.error("Couldn't find the user with this email.")
+      }
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+  const UpdatePasswordRequest = () => {
     const newPasswordParams = {
-      email: email,
       password: password,
-      passwordConfirmation: passwordConfirmation
+      passwordConfirmation: passwordConfirmation,
+      resetPasswordToken: resetPasswordToken
     }
     const params = camelToSnake(newPasswordParams);
 
-    axios.post(`${apiUrl}/`, params).then(res => {
-      if (res.data.user){
+    axios.post(`${apiUrl}/api/v1/update-password`, params).then(res => {
+      if (res.data){
+        console.log("UPdated password: ", res.data)
         navigate("/dashboard")
         cogoToast.success("Password updated successfully!")
         const current_user = res.data.user
@@ -34,20 +54,21 @@ export const ForgotPassword = () =>{
     .catch(err => {
       console.log(err)
     })
-
-
   }
 
   return(
     <div>
       <button className='back-button' onClick={ ()=> navigate(-1) }>Back</button>
       <div className='container' >
-        <form>
+      {!showResetPasswordForm ? ( <form style={{textAlign: 'center'}} onSubmit={(e) => { e.preventDefault(); verifyUserEmailRequest();}}>
           <div className='input'>
             <img src='' alt=''/>
             <input type='email' placeholder='Email' onChange={(e)=>{setEmail(e.target.value)}} />
           </div>
-
+          <button type='submit'>Verify Email</button>
+        </form>
+        ) : (
+          <form onSubmit={(e) => {e.preventDefault(); UpdatePasswordRequest();}}>
           <div className='input'>
             <img src='' alt=''/>
             <input type='password' placeholder='Password' onChange={(e)=>{setPassword(e.target.value)}} />
@@ -59,9 +80,10 @@ export const ForgotPassword = () =>{
           </div>
 
           <div className='submit-container'>
-            <button className='passwordChange' onClick = {()=>  {submitUpdatePasswordRequest()}} >Update password</button>
+            <button className='passwordChange' type='submit'>Update password</button>
           </div>
         </form>
+        )}
       </div>
     </div>
   )
