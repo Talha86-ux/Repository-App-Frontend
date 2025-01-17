@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { CableProvider } from './context/cable';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { SignUp } from './Components/UserForms/SignUp';
 import { Home } from './Components/Home/home';
@@ -15,7 +16,9 @@ root.render(
     <Header />
     <BrowserRouter>
       <Routes>
-        <Route index element={<App />} />
+        <CableProvider>
+          <Route index element={<App />} />
+        </CableProvider>
         <Route path="register" element={<SignUp />} />
         <Route path="dashboard" element={<Home />} />
         <Route path="forgot-password" element={<ForgotPassword/>} />
