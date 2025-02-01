@@ -10,18 +10,18 @@ import { Home } from './Components/Home/home';
 import { Header} from './Components/header';
 import { Footer } from './Components/Footer/footer';
 import { ForgotPassword } from './Components/ForgotPassword/ForgotPassword';
+import { Chatroom } from './Components/Chatroom/chatroom';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Header />
     <BrowserRouter>
       <Routes>
-        <CableProvider>
-          <Route index element={<App />} />
-        </CableProvider>
+        <Route index element={<App />} />
         <Route path="register" element={<SignUp />} />
         <Route path="dashboard" element={<Home />} />
         <Route path="forgot-password" element={<ForgotPassword/>} />
+        <Route path="/chatroom" element={<Chatroom />} />
       </Routes>
     </BrowserRouter>
     <Footer />
