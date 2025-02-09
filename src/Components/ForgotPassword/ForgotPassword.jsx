@@ -46,6 +46,7 @@ export const ForgotPassword = () =>{
         cogoToast.success("Password updated successfully!")
         const current_user = res.data.user
         localStorage.setItem('user', JSON.stringify(current_user))
+        localStorage.setItem("jwt", res.data.jwt)
         return res.data.user
       } else {
         cogoToast.error("Couldn't update the password, please try again")

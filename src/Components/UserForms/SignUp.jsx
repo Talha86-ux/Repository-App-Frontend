@@ -33,6 +33,8 @@ export const SignUp = () => {
         cogoToast.success("User registered successfully!")
         const current_user = res.data.user
         localStorage.setItem('user', JSON.stringify(current_user))
+        localStorage.setItem("jwt", res.data.jwt)
+
         return res.data.user
       }else{
         cogoToast.error("Couldn't create the user, please try again")
@@ -52,6 +54,8 @@ export const SignUp = () => {
     axios.post(`${apiUrl}/api/v1/sessions`, loginParams).then(res => {
       const current_user = res.data.user
       localStorage.setItem('user', JSON.stringify(current_user))
+      localStorage.setItem("jwt", res.data.jwt)
+
       if (res.data.error){
         cogoToast.error(res.data.error);
       }else {

@@ -1,10 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+
 export const Home = () => {
   const userDetails = JSON.parse(localStorage.getItem('user'));
   const navigate = useNavigate();
 
-  const handleNavigate = () => { navigate('/chatroom'); };
+  const handleNavigate = () => { navigate('/chat'); };
 
   const logout = ()=>{
     localStorage.clear();
