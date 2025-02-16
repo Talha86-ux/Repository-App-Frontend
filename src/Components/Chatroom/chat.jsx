@@ -57,7 +57,6 @@ export const Chat = () => {
         try {
           const res = await axios.get(`/api/v1/chatrooms/${currentChatroomId}/messages`);
           setMessages(res.data);
-          console.log("Fetched messages: ", res.data);
         } catch (error) {
           console.log('Error with fetch messages', error);
           setError(error);
@@ -70,11 +69,9 @@ export const Chat = () => {
         { channel: "ChatroomChannel", chatroom_id: currentChatroomId },
         {
           received: (data) => {
-            console.log("Received data: ", data);
             if (data.message !== 'Channel Subscribed') {
               setMessages((prevMessages) => {
                 const newMessages = [...prevMessages, data.message];
-                console.log("Updated messages: ", newMessages);
                 return newMessages;
               });
               scrollToBottom();
