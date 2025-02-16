@@ -1688,6 +1688,11 @@
     "schema-utils" "^3.0.0"
     "source-map" "^0.7.3"
 
+"@rails/actioncable@^8.0.100":
+  "integrity" "sha512-/vXTG6gzSW0CDqmA0hWasZ1UAGZC7g5NGM21jowh58rCCeTHAGbWwKExHn49VDuYXz+cHbL4MGfc5LMdTp9m3A=="
+  "resolved" "https://registry.npmjs.org/@rails/actioncable/-/actioncable-8.0.100.tgz"
+  "version" "8.0.100"
+
 "@remix-run/router@1.14.2":
   "version" "1.14.2"
 
@@ -2501,6 +2506,11 @@
 "acorn@^7.1.1":
   "version" "7.1.1"
 
+"actioncable@^5.2.8-1":
+  "integrity" "sha512-p/a9jeFs3KB3SWZ9w/T5HLyztooYSufOG++Uhau9YzprdBNyjFfsqrtN1roVVEzNDBGZJVr/2SSWwofvavPL1w=="
+  "resolved" "https://registry.npmjs.org/actioncable/-/actioncable-5.2.8-1.tgz"
+  "version" "5.2.8-1"
+
 "address@^1.0.1":
   "version" "1.1.2"
 
@@ -3136,14 +3146,10 @@
     "lodash.memoize" "^4.1.2"
     "lodash.uniq" "^4.5.0"
 
-"caniuse-lite@^1.0.0", "caniuse-lite@^1.0.30001035":
-  "version" "1.0.30001035"
-
-"caniuse-lite@^1.0.30001538":
-  "version" "1.0.30001572"
-
-"caniuse-lite@^1.0.30001565":
-  "version" "1.0.30001572"
+"caniuse-lite@^1.0.0", "caniuse-lite@^1.0.30001035", "caniuse-lite@^1.0.30001538", "caniuse-lite@^1.0.30001565":
+  "integrity" "sha512-A95VKan0kdtrsnMubMKxEKUKImOPSuCpYgxSQBo036P5YYgVIcOYJEgt/txJWqObiRQeISNCfef9nvlQ0vbV7A=="
+  "resolved" "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001692.tgz"
+  "version" "1.0.30001692"
 
 "case-sensitive-paths-webpack-plugin@^2.4.0":
   "integrity" "sha512-roIFONhcxog0JSSWbvVAh3OocukmSgpqOH6YpMkCvav/ySIV3JKg4Dc8vYtQjYi/UxpNE36r/9v+VqTQqgkYmw=="
@@ -6502,10 +6508,7 @@
   "resolved" "https://registry.npmjs.org/lodash.uniq/-/lodash.uniq-4.5.0.tgz"
   "version" "4.5.0"
 
-"lodash@^4.17.13":
-  "version" "4.17.15"
-
-"lodash@^4.17.15", "lodash@^4.17.20", "lodash@^4.17.21", "lodash@^4.7.0":
+"lodash@^4.17.13", "lodash@^4.17.15", "lodash@^4.17.20", "lodash@^4.17.21", "lodash@^4.7.0":
   "integrity" "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
   "resolved" "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
   "version" "4.17.21"

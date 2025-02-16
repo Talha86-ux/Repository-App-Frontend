@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+// import { CableProvider } from './context/cable';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { SignUp } from './Components/UserForms/SignUp';
 import { Home } from './Components/Home/home';
 import { Header} from './Components/header';
 import { Footer } from './Components/Footer/footer';
 import { ForgotPassword } from './Components/ForgotPassword/ForgotPassword';
+import { Chat } from './Components/Chatroom/chat';
+import { Chatroom } from './Components/Chatroom/chatroom';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -19,6 +22,8 @@ root.render(
         <Route path="register" element={<SignUp />} />
         <Route path="dashboard" element={<Home />} />
         <Route path="forgot-password" element={<ForgotPassword/>} />
+        <Route path="/chat" element={<Chat />} />
+        <Route path="/chatroom" element={<Chatroom />}/>
       </Routes>
     </BrowserRouter>
     <Footer />
