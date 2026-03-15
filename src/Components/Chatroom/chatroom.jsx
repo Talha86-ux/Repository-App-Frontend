@@ -27,16 +27,20 @@ export const Chatroom = () => {
       }).catch(error => console.log('Error with fetch', error));
   };
 
-  return(
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={chatroomName}
-        onChange={(e) => setChatroomName(e.target.value)}
-        placeholder="Chatroom Name"
-      />
-      <button type="submit">Create Chatroom</button>
-    </form>
-  )
-
+  return (
+    <div className="chatroom-wrapper">
+      <h2 className="chatroom-title">Create Chatroom</h2>
+      <form className="chatroom-form" onSubmit={handleSubmit}>
+        <input
+          className="chatroom-input"
+          type="text"
+          value={chatroomName}
+          onChange={(e) => setChatroomName(e.target.value)}
+          placeholder="Chatroom Name"
+          aria-label="Chatroom Name"
+        />
+        <button className="chatroom-button" type="submit">Create</button>
+      </form>
+    </div>
+  );
 };

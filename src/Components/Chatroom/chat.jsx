@@ -131,15 +131,17 @@ export const Chat = () => {
   }
 
   return (
-    <div>
-      <section>
-        <button onClick={handleNavigate}>Create a new Chatroom</button>
-      </section>
-      <section>
-        <div className="chat-container">
-          <label className="LabelClass">Select a Chatroom:</label>
+    <div className="chat-parent-wrapper">
+      <header className="chat-header">
+        <h2>Team Chatroom</h2>
+        <button className="chat-primary-button" onClick={handleNavigate}>+ New Chatroom</button>
+      </header>
+
+      <div className="chat-container">
+        <div className="chat-sidebar">
+          <label className="label">Select a Chatroom</label>
           <select
-            className="selectClass"
+            className="select"
             value={currentChatroomId}
             onChange={handleChatroomChange}
           >
@@ -149,38 +151,48 @@ export const Chat = () => {
             ))}
           </select>
 
-          <div className="message-list" ref={messageListRef}>
-            {messages.map((message, index) => (
-              <div key={message.id || index} className="message">
-                <strong>{message?.user?.first_name}:</strong> {message.body}
-              </div>
+          <label className="label">Send To</label>
+          <select
+            className="select"
+            value={recipientId}
+            onChange={(e) => setRecipientId(e.target.value)}
+          >
+            <option value="" disabled>Select a user</option>
+            {users.map((userItem) => (
+              <option key={userItem.id} value={userItem.id}>{userItem.first_name}</option>
             ))}
+          </select>
+        </div>
+
+        <main className="chat-main">
+          <div className="message-list" ref={messageListRef}>
+            {messages.map((message, index) => {
+              const isOwn = message?.user?.id === user?.id;
+              return (
+                <div key={message.id || index} className={`message ${isOwn ? 'own-message' : 'other-message'}`}>
+                  <div className="message-meta">
+                    <span className="message-author">{message?.user?.first_name || 'Unknown'}</span>
+                    <span className="message-time">{message.created_at ? new Date(message.created_at).toLocaleTimeString() : ''}</span>
+                  </div>
+                  <div className="message-body">{message.body}</div>
+                </div>
+              );
+            })}
           </div>
 
           <form className="message-form" onSubmit={handleSendMessage}>
-            <label className="LabelClass">Write Message:</label>
             <input
-              className="inputClass"
+              className="message-input"
               type="text"
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
               placeholder="Type your message..."
+              aria-label="Type your message"
             />
-            <label className="LabelClass">Send To:</label>
-            <select
-              className="selectClass"
-              value={recipientId}
-              onChange={(e) => setRecipientId(e.target.value)}
-            >
-              <option value="" disabled>Select a user</option>
-              {users.map((user) => (
-                <option key={user.id} value={user.id}>{user.first_name}</option>
-              ))}
-            </select>
-            <button className="submitButtonClass" type="submit">Send</button>
+            <button className="send-button" type="submit">Send</button>
           </form>
-        </div>
-      </section>
+        </main>
+      </div>
     </div>
   );
 };
