@@ -15,8 +15,8 @@ import { Chatroom } from './Components/Chatroom/chatroom';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Header />
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route index element={<App />} />
         <Route path="register" element={<SignUp />} />
@@ -25,8 +25,8 @@ root.render(
         <Route path="/chat" element={<Chat />} />
         <Route path="/chatroom" element={<Chatroom />}/>
       </Routes>
+      <Footer />
     </BrowserRouter>
-    <Footer />
   </React.StrictMode>
 );
 

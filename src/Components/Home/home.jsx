@@ -2,14 +2,25 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
-  const userDetails = JSON.parse(localStorage.getItem('user'));
   const navigate = useNavigate();
+  const userDetailsJson = localStorage.getItem('user');
+  const userDetails = userDetailsJson ? JSON.parse(userDetailsJson) : null;
+
+  React.useEffect(() => {
+    if (!userDetails) {
+      navigate('/register');
+    }
+  }, [navigate, userDetails]);
 
   const handleNavigate = () => { navigate('/chat'); };
 
-  const logout = ()=>{
+  const logout = () => {
     localStorage.clear();
-    window.location.href = '/';
+    navigate('/register');
+  }
+
+  if (!userDetails) {
+    return null; // redirect initiated
   }
 
   return (
