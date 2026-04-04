@@ -10,31 +10,12 @@ export const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const messageListRef = useRef(null);
-  const [users, setUsers] = useState([]);
-  const [recipientId, setRecipientId] = useState("");
   const [currentChatroomId, setCurrentChatroomId] = useState("");
   const [chatrooms, setChatrooms] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [isLoadingChatroom, setIsLoadingChatroom] = useState(true);
   const [error, setError] = useState(null);
 
   const handleNavigate = () => { navigate('/chatroom'); };
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const res = await axios.get('/api/v1/users');
-        setUsers(res.data);
-        setIsLoading(false);
-      } catch (error) {
-        console.log('Error with fetch', error);
-        setError(error);
-        setIsLoading(false);
-      }
-    };
-
-    fetchUsers();
-  }, []);
 
   useEffect(() => {
     const fetchChatrooms = async () => {
@@ -103,7 +84,6 @@ export const Chat = () => {
     if (currentChatroomId) {
       CableApp.cable.subscriptions.subscriptions[0].perform("send_message", {
         user_id: user.id,
-        recipient_id: recipientId,
         chatroom_id: currentChatroomId,
         content: newMessage,
       });
@@ -117,10 +97,6 @@ export const Chat = () => {
   const handleChatroomChange = (e) => {
     setCurrentChatroomId(e.target.value);
   };
-
-  if (isLoading) {
-    return <p>Loading users...</p>;
-  }
 
   if (isLoadingChatroom) {
     return <p>Loading chatrooms...</p>;
@@ -151,17 +127,6 @@ export const Chat = () => {
             ))}
           </select>
 
-          <label className="label">Send To</label>
-          <select
-            className="select"
-            value={recipientId}
-            onChange={(e) => setRecipientId(e.target.value)}
-          >
-            <option value="" disabled>Select a user</option>
-            {users.map((userItem) => (
-              <option key={userItem.id} value={userItem.id}>{userItem.first_name}</option>
-            ))}
-          </select>
         </div>
 
         <main className="chat-main">
