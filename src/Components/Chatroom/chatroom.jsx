@@ -30,6 +30,7 @@ export const Chatroom = () => {
   return (
     <div className="chatroom-wrapper">
       <h2 className="chatroom-title">Create Chatroom</h2>
+      <button className="chatroom-button back-button" onClick={() => navigate(-1)} aria-label="Go back">←</button>
       <form className="chatroom-form" onSubmit={handleSubmit}>
         <input
           className="chatroom-input"

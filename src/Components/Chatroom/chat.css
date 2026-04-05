@@ -40,6 +40,11 @@
   cursor: pointer;
 }
 
+.back-button {
+  padding: 0.5rem 0.75rem;
+  margin-right: 0.5rem;
+}
+
 .chat-primary-button:hover,
 .chatroom-button:hover,
 .send-button:hover {
